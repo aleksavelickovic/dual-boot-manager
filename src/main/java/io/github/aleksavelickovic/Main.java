@@ -3,10 +3,14 @@ package io.github.aleksavelickovic;
 
 import io.github.aleksavelickovic.ui.MainWindow;
 
+import javax.swing.*;
+
 public class Main {
     static void main(String[] args) {
         System.out.println("Hello World!");
-        MainWindow window = new MainWindow();
-        window.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            MainWindow frame = new MainWindow();
+            frame.setVisible(true);
+        });
     }
 }
