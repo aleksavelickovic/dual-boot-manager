@@ -38,3 +38,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /grub_backup
+/.idea/db-forest-config.xml
