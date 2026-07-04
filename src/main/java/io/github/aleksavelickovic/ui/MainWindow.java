@@ -1,21 +1,19 @@
 package io.github.aleksavelickovic.ui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class mainWindow extends JFrame {
+public class MainWindow extends JFrame {
     private JPanel mainPanel;
     private JComboBox comboBox;
 
-    public mainWindow() {
-        setBounds(100, 100, 417, 261);
+    public MainWindow() {
         setLocationRelativeTo(null);
+        setBounds(100, 100, 1280, 720);
         List<String> options = new ArrayList<String>();
         options.add("String 1");
         options.add("String 2");
-        String string = "stirng";
         comboBox.setModel(new DefaultComboBoxModel<Object>(options.toArray()));
         getContentPane().add(comboBox);
     }
