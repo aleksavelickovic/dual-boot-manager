@@ -4,7 +4,7 @@
   <img src="images/logo.png"  alt="logo"/>
 </p>
 
-
+#
 Dual Boot Manager is a small desktop utility for Linux systems that helps you reboot directly into a selected operating
 system entry without waiting for the GRUB menu at startup.
 
