@@ -7,11 +7,22 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static void main(String[] args) throws IOException {
+    static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
+
+        List options = getOptionsList();
+
+        SwingUtilities.invokeLater(() -> {
+            MainWindow frame = new MainWindow(options);
+            frame.setVisible(true);
+        });
+    }
+
+    private static List getOptionsList() throws IOException {
         List options = new ArrayList<String>();
 
         ProcessBuilder pb = new ProcessBuilder("bash", "-c",
@@ -28,10 +39,6 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        SwingUtilities.invokeLater(() -> {
-            MainWindow frame = new MainWindow(options);
-            frame.setVisible(true);
-        });
+        return options;
     }
 }

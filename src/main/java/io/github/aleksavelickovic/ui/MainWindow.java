@@ -41,7 +41,7 @@ public class MainWindow extends JFrame {
 
     public static void rebootButtonOnClick(String selectedValue) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder("bash", "-c",
-                "grub2-reboot \"" + selectedValue + "\"");
+                "pkexec grub2-reboot \"" + selectedValue + "\"");
         Process process1 = pb.start();
 
         while (process1.isAlive()) {
