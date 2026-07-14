@@ -1,8 +1,15 @@
 # Dual Boot Manager
 
-Dual Boot Manager is a small desktop utility for Linux systems that helps you reboot directly into a selected operating system entry without waiting for the GRUB menu at startup.
+<p align="center">
+  <img src="images/logo.png"  alt="logo"/>
+</p>
 
-The app reads available GRUB menu entries from the local system, shows them in a simple Swing interface, and then triggers a one-time GRUB boot entry change followed by a reboot.
+
+Dual Boot Manager is a small desktop utility for Linux systems that helps you reboot directly into a selected operating
+system entry without waiting for the GRUB menu at startup.
+
+The app reads available GRUB menu entries from the local system, shows them in a simple Swing interface, and then
+triggers a one-time GRUB boot entry change followed by a reboot.
 
 ## What it does
 
@@ -19,8 +26,8 @@ The application follows this flow:
 1. It executes a privileged command to extract `menuentry` values from GRUB configuration.
 2. It populates the GUI dropdown with the discovered entries.
 3. When you click `Reboot`, it runs:
-   - `pkexec grub2-reboot "<selected entry>"`
-   - `reboot`
+    - `pkexec grub2-reboot "<selected entry>"`
+    - `reboot`
 
 Because of this, the app is meant for systems where:
 
@@ -82,7 +89,8 @@ java -jar target/dual-boot-manager-1.0-SNAPSHOT.jar
 
 ## Security warning
 
-This tool executes system-level reboot and bootloader commands. Use it only on a machine you control and only if you understand the impact of changing the next boot target.
+This tool executes system-level reboot and bootloader commands. Use it only on a machine you control and only if you
+understand the impact of changing the next boot target.
 
 ## License
 
