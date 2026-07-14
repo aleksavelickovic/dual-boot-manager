@@ -27,7 +27,7 @@ public class Main {
     private static List getOptionsList() throws IOException {
         List options = new ArrayList<String>();
 
-        Process process = processService.execute(ProcessService.READ_GRUB, true, null);
+        Process process = processService.execute(ProcessService.READ_GRUB, true);
 
         try (BufferedReader reader = new BufferedReader( // TODO refactor into a separate service
                 new InputStreamReader(process.getInputStream()))) {

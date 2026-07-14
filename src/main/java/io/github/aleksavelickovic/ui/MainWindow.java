@@ -56,7 +56,7 @@ public class MainWindow extends JFrame {
             Thread.sleep(500);
         }
 
-        Process process2 = processService.execute(ProcessService.REBOOT, false, null);
+        Process process2 = processService.execute(ProcessService.REBOOT, false);
 
     }
 

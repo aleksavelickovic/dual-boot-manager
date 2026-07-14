@@ -13,7 +13,16 @@ public class ProcessServiceImpl implements ProcessService {
     public static final String ROOT_COMMAND = "pkexec";
 
     @Override
-    public Process execute(@NonNull Integer processName, Boolean root, String... processArgs) throws IOException {
+    public Process execute(@NonNull Integer processName, @NonNull Boolean root, String... processArgs) throws IOException {
+        return executeHelper(processName, root, processArgs);
+    }
+
+    @Override
+    public Process execute(@NonNull Integer processName, @NonNull Boolean root) throws IOException {
+        return executeHelper(processName, root, null);
+    }
+
+    private Process executeHelper(@NonNull Integer processName, @NonNull Boolean root, String... processArgs) throws IOException {
         ProcessBuilder pb = null;
         String processString = processes.get(processName);
         if (root) {

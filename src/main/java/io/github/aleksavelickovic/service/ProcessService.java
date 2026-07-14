@@ -20,4 +20,6 @@ public interface ProcessService {
     );
 
     public Process execute(@NonNull Integer processName, Boolean root, String... processArgs) throws IOException;
+
+    public Process execute(@NonNull Integer processName, Boolean root) throws IOException;
 }
