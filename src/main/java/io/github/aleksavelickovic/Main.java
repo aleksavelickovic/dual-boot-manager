@@ -1,6 +1,8 @@
 package io.github.aleksavelickovic;
 
 
+import io.github.aleksavelickovic.service.ProcessService;
+import io.github.aleksavelickovic.service.impl.ProcessServiceImpl;
 import io.github.aleksavelickovic.ui.MainWindow;
 
 import javax.swing.*;
@@ -11,12 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static void main(String[] args) throws IOException {
+    private static final ProcessService processService = new ProcessServiceImpl();
 
+    static void main(String[] args) throws IOException {
         List options = getOptionsList();
 
         SwingUtilities.invokeLater(() -> {
-            MainWindow frame = new MainWindow(options);
+            MainWindow frame = new MainWindow(options, new ProcessServiceImpl());
             frame.setVisible(true);
         });
     }
@@ -24,12 +27,9 @@ public class Main {
     private static List getOptionsList() throws IOException {
         List options = new ArrayList<String>();
 
-        ProcessBuilder pb = new ProcessBuilder("bash", "-c",
-                "pkexec awk -F\\' '/menuentry / {print $2}' /boot/grub2/grub.cfg");
+        Process process = processService.execute(ProcessService.READ_GRUB, true, null);
 
-        Process process = pb.start();
-
-        try (BufferedReader reader = new BufferedReader(
+        try (BufferedReader reader = new BufferedReader( // TODO refactor into a separate service
                 new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
