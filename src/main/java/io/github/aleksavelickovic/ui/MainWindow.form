@@ -21,7 +21,7 @@
         <properties>
           <alignmentY value="0.5"/>
           <autoscrolls value="false"/>
-          <foreground color="-16775975"/>
+          <foreground color="-16774439"/>
           <model/>
           <name value="comboBox"/>
         </properties>
