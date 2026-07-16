@@ -39,3 +39,4 @@ build/
 .DS_Store
 /grub_backup
 /.idea/db-forest-config.xml
+/dual-boot-manager-1.0.0-1.x86_64.rpm
