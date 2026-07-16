@@ -41,3 +41,7 @@ build/
 /.idea/db-forest-config.xml
 /dual-boot-manager-1.0.0-1.x86_64.rpm
 /dual-boot-manager_1.0.0_amd64.deb
+/dual-boot-manager-1.0.1-1.x86_64.rpm
+/dual-boot-manager_1.0.1_amd64.deb
+/jpackage_command.txt
+/prompt.txt

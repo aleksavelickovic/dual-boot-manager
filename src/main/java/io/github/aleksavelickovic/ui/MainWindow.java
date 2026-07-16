@@ -11,18 +11,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 public class MainWindow extends JFrame {
     private final ProcessService processService; // Dependecy Injection
 
     private JPanel mainPanel;
-    private JComboBox comboBox;
+    private JComboBox<Object> comboBox;
     private JButton rebootButton;
+
+    private final String osName = System.getProperty("os.name");
 
     public MainWindow(List<String> options, ProcessService processService) {
         this.processService = processService;
-        options.addFirst("Fedora Linux");
+        options.addFirst(osName);
 
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
@@ -37,8 +40,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    ;
-                    rebootButtonOnClick((String) comboBox.getSelectedItem());
+                    rebootButtonOnClick((String) Objects.requireNonNull(comboBox.getSelectedItem()));
                 } catch (Exception e) { // TODO change to IOException later
                     throw new RuntimeException(e);
                 }
@@ -50,10 +52,13 @@ public class MainWindow extends JFrame {
     }
 
     public void rebootButtonOnClick(String selectedValue) throws IOException, InterruptedException {
-        Process process1 = processService.execute(ProcessService.SET_GRUB, true, "\"" + selectedValue + "\"");
 
-        while (process1.isAlive()) { // TODO
-            Thread.sleep(500);
+        if (!selectedValue.equals(osName)) {
+            Process process1 = processService.execute(ProcessService.SET_GRUB, true, "\"" + selectedValue + "\"");
+
+            while (process1.isAlive()) { // TODO
+                Thread.sleep(500);
+            }
         }
 
         Process process2 = processService.execute(ProcessService.REBOOT, false);
