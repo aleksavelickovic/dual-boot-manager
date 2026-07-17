@@ -5,8 +5,10 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import io.github.aleksavelickovic.service.ProcessService;
 import io.github.aleksavelickovic.service.impl.ProcessServiceImpl;
 import io.github.aleksavelickovic.ui.MainWindow;
+import io.github.aleksavelickovic.ui.utils.TrayManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,7 +24,8 @@ public class Main {
         FlatDarkLaf.setup();
         SwingUtilities.invokeLater(() -> {
             MainWindow frame = new MainWindow(options, new ProcessServiceImpl());
-            frame.setVisible(true);
+            new TrayManager(frame);
+            frame.setVisible(false);
         });
     }
 

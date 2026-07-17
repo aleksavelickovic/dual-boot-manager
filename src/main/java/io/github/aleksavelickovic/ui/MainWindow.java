@@ -21,6 +21,8 @@ import java.util.Objects;
 public class MainWindow extends JFrame {
     private final ProcessService processService; // Dependecy Injection
 
+    public List<String> options;
+
     private JPanel mainPanel;
     private JComboBox<Object> comboBox;
     private JButton rebootButton;
@@ -34,6 +36,8 @@ public class MainWindow extends JFrame {
 
     public MainWindow(List<String> options, ProcessService processService) {
         this.processService = processService;
+        this.options = options;
+
         options.addFirst(osName);
 
         setContentPane(mainPanel);

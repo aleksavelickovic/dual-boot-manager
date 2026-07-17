@@ -1,7 +1,7 @@
 # Dual Boot Manager
 
 <p align="center">
-  <img src="images/logo.png"  alt="logo"/>
+  <img src="src/main/resources/images/logo.png"  alt="logo"/>
 </p>
 
 #
