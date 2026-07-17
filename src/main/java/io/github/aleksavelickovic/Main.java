@@ -16,15 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final ProcessService processService = new ProcessServiceImpl();
+    private static final ProcessService processService = ProcessServiceImpl.getInstance();
 
     static void main(String[] args) throws IOException {
         List options = getOptionsList();
 
         FlatDarkLaf.setup();
         SwingUtilities.invokeLater(() -> {
-            MainWindow frame = new MainWindow(options, new ProcessServiceImpl());
-            new TrayManager(frame);
+            MainWindow frame = new MainWindow(options, processService);
+            new TrayManager(frame, processService);
             frame.setVisible(false);
         });
     }

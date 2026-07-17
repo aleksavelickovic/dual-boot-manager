@@ -2,6 +2,7 @@ package io.github.aleksavelickovic.ui.utils;
 
 import dorkbox.systemTray.Menu;
 import dorkbox.systemTray.MenuItem;
+import io.github.aleksavelickovic.service.ProcessService;
 import io.github.aleksavelickovic.ui.MainWindow;
 
 import javax.swing.*;
@@ -11,7 +12,10 @@ import java.awt.event.ActionListener;
 
 public class TrayManager {
 
-    public TrayManager(MainWindow window) {
+    private final ProcessService processService; // Dependecy Injection
+
+    public TrayManager(MainWindow window, ProcessService processService) {
+        this.processService = processService;
 
         dorkbox.systemTray.SystemTray systemTray = dorkbox.systemTray.SystemTray.get();
         if (systemTray == null) {
