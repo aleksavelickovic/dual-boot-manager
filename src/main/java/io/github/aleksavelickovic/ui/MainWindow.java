@@ -40,7 +40,7 @@ public class MainWindow extends JFrame {
         setLocationRelativeTo(null);
         setSize(640, 360);
         setMinimumSize(minimumSize);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setTitle(title);
 
 
