@@ -20,8 +20,13 @@ public class MainWindow extends JFrame {
     private JPanel mainPanel;
     private JComboBox<Object> comboBox;
     private JButton rebootButton;
+    private JLabel versionLabel;
 
     private final String osName = System.getProperty("os.name");
+    private final String appVersion = "v1.0.1-alpha"; // TODO get version at runtime?
+    private final String title = "Dual Boot Manager";
+
+    private final Dimension minimumSize = new Dimension(640, 360);
 
     public MainWindow(List<String> options, ProcessService processService) {
         this.processService = processService;
@@ -30,7 +35,9 @@ public class MainWindow extends JFrame {
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setSize(640, 360);
+        setMinimumSize(minimumSize);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle(title);
 
 
         comboBox.setModel(new DefaultComboBoxModel<Object>(options.toArray()));
@@ -46,6 +53,8 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        versionLabel.setText(appVersion);
 
         revalidate();
         repaint();
@@ -94,14 +103,22 @@ public class MainWindow extends JFrame {
         final Spacer spacer1 = new Spacer();
         mainPanel.add(spacer1, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
-        mainPanel.add(spacer2, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        mainPanel.add(spacer2, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
-        mainPanel.add(spacer3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        mainPanel.add(spacer3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 7, false));
         final Spacer spacer4 = new Spacer();
         mainPanel.add(spacer4, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         rebootButton = new JButton();
         rebootButton.setText("Reboot");
         mainPanel.add(rebootButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new BorderLayout(0, 0));
+        mainPanel.add(panel1, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        versionLabel = new JLabel();
+        versionLabel.setHorizontalAlignment(11);
+        versionLabel.setHorizontalTextPosition(11);
+        versionLabel.setText("<version>");
+        panel1.add(versionLabel, BorderLayout.SOUTH);
     }
 
     /**
@@ -110,4 +127,5 @@ public class MainWindow extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
+
 }
