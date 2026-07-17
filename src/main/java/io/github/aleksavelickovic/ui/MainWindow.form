@@ -21,7 +21,7 @@
         <properties>
           <alignmentY value="0.5"/>
           <autoscrolls value="false"/>
-          <foreground color="-16774439"/>
+          <foreground color="-524298"/>
           <model/>
           <name value="comboBox"/>
         </properties>
@@ -64,6 +64,7 @@
           <component id="76058" class="javax.swing.JLabel" binding="versionLabel">
             <constraints border-constraint="South"/>
             <properties>
+              <font size="11"/>
               <horizontalAlignment value="11"/>
               <horizontalTextPosition value="11"/>
               <text value="&lt;version&gt;"/>

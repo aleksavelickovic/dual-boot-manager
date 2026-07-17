@@ -1,16 +1,20 @@
 package io.github.aleksavelickovic.ui;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import io.github.aleksavelickovic.service.ProcessService;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
@@ -95,7 +99,7 @@ public class MainWindow extends JFrame {
         comboBox = new JComboBox();
         comboBox.setAlignmentY(0.5f);
         comboBox.setAutoscrolls(false);
-        comboBox.setForeground(new Color(-16774439));
+        comboBox.setForeground(new Color(-524298));
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         comboBox.setModel(defaultComboBoxModel1);
         comboBox.setName("comboBox");
@@ -115,10 +119,34 @@ public class MainWindow extends JFrame {
         panel1.setLayout(new BorderLayout(0, 0));
         mainPanel.add(panel1, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         versionLabel = new JLabel();
+        Font versionLabelFont = this.$$$getFont$$$(null, -1, 11, versionLabel.getFont());
+        if (versionLabelFont != null) versionLabel.setFont(versionLabelFont);
         versionLabel.setHorizontalAlignment(11);
         versionLabel.setHorizontalTextPosition(11);
         versionLabel.setText("<version>");
         panel1.add(versionLabel, BorderLayout.SOUTH);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**

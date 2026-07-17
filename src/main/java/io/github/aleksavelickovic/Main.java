@@ -1,6 +1,7 @@
 package io.github.aleksavelickovic;
 
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import io.github.aleksavelickovic.service.ProcessService;
 import io.github.aleksavelickovic.service.impl.ProcessServiceImpl;
 import io.github.aleksavelickovic.ui.MainWindow;
@@ -18,6 +19,7 @@ public class Main {
     static void main(String[] args) throws IOException {
         List options = getOptionsList();
 
+        FlatDarkLaf.setup();
         SwingUtilities.invokeLater(() -> {
             MainWindow frame = new MainWindow(options, new ProcessServiceImpl());
             frame.setVisible(true);
