@@ -40,16 +40,19 @@ public class TrayManager {
         for (String option : window.options) {
             menu.add(new MenuItem(option, new ActionListener() {
                 @Override
-                @SneakyThrows
                 public void actionPerformed(ActionEvent e) {
-                    if (!option.equals(osName)) {
-                        Process process1 = processService.execute(ProcessService.SET_GRUB, true, "\"" + option + "\"");
+                    try {
+                        if (!option.equals(osName)) {
+                            Process process1 = processService.execute(ProcessService.SET_GRUB, true, "\"" + option + "\"");
 
-                        while (process1.isAlive()) { // TODO
-                            Thread.sleep(500);
+                            while (process1.isAlive()) { // TODO
+                                Thread.sleep(500);
+                            }
                         }
+                        Process process2 = processService.execute(ProcessService.REBOOT, false);
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
                     }
-                    Process process2 = processService.execute(ProcessService.REBOOT, false);
                 }
             }));
         }
