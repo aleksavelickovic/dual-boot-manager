@@ -4,6 +4,7 @@ import dorkbox.systemTray.Menu;
 import dorkbox.systemTray.MenuItem;
 import io.github.aleksavelickovic.service.ProcessService;
 import io.github.aleksavelickovic.ui.MainWindow;
+import lombok.SneakyThrows;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,8 @@ import java.awt.event.ActionListener;
 public class TrayManager {
 
     private final ProcessService processService; // Dependecy Injection
+
+    private final String osName = System.getProperty("os.name");
 
     public TrayManager(MainWindow window, ProcessService processService) {
         this.processService = processService;
@@ -37,8 +40,16 @@ public class TrayManager {
         for (String option : window.options) {
             menu.add(new MenuItem(option, new ActionListener() {
                 @Override
+                @SneakyThrows
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Option pressed: " + option); // TODO implement logic trough ProcessService
+                    if (!option.equals(osName)) {
+                        Process process1 = processService.execute(ProcessService.SET_GRUB, true, "\"" + option + "\"");
+
+                        while (process1.isAlive()) { // TODO
+                            Thread.sleep(500);
+                        }
+                    }
+                    Process process2 = processService.execute(ProcessService.REBOOT, false);
                 }
             }));
         }
