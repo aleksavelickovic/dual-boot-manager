@@ -5,8 +5,10 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import io.github.aleksavelickovic.service.ProcessService;
 import io.github.aleksavelickovic.service.impl.ProcessServiceImpl;
 import io.github.aleksavelickovic.ui.MainWindow;
+import io.github.aleksavelickovic.ui.utils.TrayManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,15 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final ProcessService processService = new ProcessServiceImpl();
+    private static final ProcessService processService = ProcessServiceImpl.getInstance();
 
     static void main(String[] args) throws IOException {
         List options = getOptionsList();
 
         FlatDarkLaf.setup();
         SwingUtilities.invokeLater(() -> {
-            MainWindow frame = new MainWindow(options, new ProcessServiceImpl());
-            frame.setVisible(true);
+            MainWindow frame = new MainWindow(options, processService);
+            new TrayManager(frame, processService);
+            frame.setVisible(false);
         });
     }
 

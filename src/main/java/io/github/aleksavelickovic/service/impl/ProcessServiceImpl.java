@@ -10,6 +10,7 @@ import java.util.Map;
 import static java.util.Map.entry;
 
 public class ProcessServiceImpl implements ProcessService {
+
     public static final String ROOT_COMMAND = "pkexec";
 
     @Override
@@ -38,5 +39,20 @@ public class ProcessServiceImpl implements ProcessService {
         Process process = pb.start();
 
         return process;
+    }
+
+
+    // Bill Pugh Singleton
+
+    private ProcessServiceImpl() {
+
+    }
+
+    private static class ProcessServiceImplSingletonHelper {
+        private static final ProcessServiceImpl PROCESS_SERVICE_INSTANCE = new ProcessServiceImpl();
+    }
+
+    public static ProcessServiceImpl getInstance() {
+        return ProcessServiceImplSingletonHelper.PROCESS_SERVICE_INSTANCE;
     }
 }
