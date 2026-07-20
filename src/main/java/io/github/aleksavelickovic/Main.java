@@ -29,8 +29,8 @@ public class Main {
         });
     }
 
-    private static List getOptionsList() throws IOException {
-        List options = new ArrayList<String>();
+    private static List<String> getOptionsList() throws IOException {
+        List<String> options = new ArrayList<String>();
 
         Process process = processService.execute(ProcessService.READ_GRUB, true);
 
