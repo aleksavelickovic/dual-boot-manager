@@ -3,6 +3,7 @@ package io.github.aleksavelickovic;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import io.github.aleksavelickovic.service.ProcessService;
+import io.github.aleksavelickovic.service.impl.ProcessServiceDaemonImpl;
 import io.github.aleksavelickovic.service.impl.ProcessServiceImpl;
 import io.github.aleksavelickovic.ui.MainWindow;
 import io.github.aleksavelickovic.ui.utils.TrayManager;
@@ -19,6 +20,10 @@ public class Main {
     private static final ProcessService processService = ProcessServiceImpl.getInstance();
 
     static void main(String[] args) throws IOException {
+        ProcessServiceDaemonImpl daemonTester = ProcessServiceDaemonImpl.getInstance();
+        daemonTester.execute(1, null, null);
+
+
         List options = getOptionsList();
 
         FlatDarkLaf.setup();
